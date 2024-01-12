@@ -1,13 +1,4 @@
-import {
-  ChakraProvider,
-  Flex,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  Center,
-  Image,
-} from "@chakra-ui/react";
+import { ChakraProvider, Flex, Center, Image } from "@chakra-ui/react";
 
 export default function Header() {
   return (
@@ -16,15 +7,6 @@ export default function Header() {
         <Center boxSize="300px">
           <Image src="landa logo.JPG" alt="Logo" />
         </Center>
-        <Tabs size="lg">
-          <TabList gap="80px">
-            <Tab>HOME</Tab>
-            <Tab>SHOP</Tab>
-            <Tab>COLLEÇÕES</Tab>
-            <Tab>SOBRE</Tab>
-            <Tab>CONTATO</Tab>
-          </TabList>
-        </Tabs>
       </Flex>
     </ChakraProvider>
   );

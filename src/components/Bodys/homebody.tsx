@@ -1,31 +1,32 @@
 import {
   ChakraProvider,
   Text,
-  Flex,
-  Card,
   Button,
   Box,
-  CardBody,
   Heading,
+  Image,
 } from "@chakra-ui/react";
 
 export default function HomeBody() {
   return (
     <ChakraProvider>
       <Box
+        position="relative"
         display="flex"
         flexDirection="column"
-        alignItems="end"
-        width="100%"
-        bgImage="url('landa 1.jpg')"
-        bgPosition="center"
-        bgSize="cover"
-        px={300}
-        py={500}
-        mb={2}
-        gap={30}
+        alignItems="center"
+        gap={5}
       >
-        <Box display="flex" flexDirection="column" alignItems="center" gap={5}>
+        <Image src="landa 1.jpg" width="100%" />
+        <Box
+          position="absolute"
+          top="40%"
+          transform="translateX(150%)"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          gap={5}
+        >
           <Box
             display="flex"
             flexDirection="column"
