@@ -1,5 +1,6 @@
 import * as React from "react";
 import HeaderHome from "@/components/Header/header";
+import HomeBody from "@/components/HomeBody/homebody";
 import styles from "@/styles/home.module.css";
 
 function Home() {
@@ -7,7 +8,7 @@ function Home() {
     <>
       <div className={styles.background}>
         <HeaderHome />
-        <div>body</div>
+        <HomeBody />
         <div>footer</div>
       </div>
     </>
