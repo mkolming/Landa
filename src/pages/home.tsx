@@ -15,6 +15,7 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
+  Text,
 } from "@chakra-ui/react";
 
 function Home() {
@@ -34,12 +35,39 @@ function Home() {
                 gap="80px"
                 justifyContent="center"
                 mb="5"
+                height={8}
+                marginBottom={10}
               >
-                <Tab>HOME</Tab>
-                <Tab>SHOP</Tab>
-                <Tab>COLEÇÕES</Tab>
-                <Tab>SOBRE</Tab>
-                <Tab>CONTATO</Tab>
+                <Tab
+                  borderBottom="2px solid #CBD5E0"
+                  _selected={{ borderBottom: "3px solid #3182CE" }}
+                >
+                  <Text fontFamily="Menlo">HOME</Text>
+                </Tab>
+                <Tab
+                  borderBottom="2px solid #CBD5E0"
+                  _selected={{ borderBottom: "3px solid #3182CE" }}
+                >
+                  <Text>SHOP</Text>
+                </Tab>
+                <Tab
+                  borderBottom="2px solid #CBD5E0"
+                  _selected={{ borderBottom: "3px solid #3182CE" }}
+                >
+                  <Text>COLEÇÕES</Text>
+                </Tab>
+                <Tab
+                  borderBottom="2px solid #CBD5E0"
+                  _selected={{ borderBottom: "3px solid #3182CE" }}
+                >
+                  <Text>SOBRE</Text>
+                </Tab>
+                <Tab
+                  borderBottom="2px solid #CBD5E0"
+                  _selected={{ borderBottom: "3px solid #3182CE" }}
+                >
+                  <Text>CONTATO</Text>
+                </Tab>
               </TabList>
               <TabPanels>
                 <TabPanel p={0}>
