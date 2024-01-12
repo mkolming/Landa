@@ -13,7 +13,12 @@ import {
 function Footer() {
   return (
     <ChakraProvider>
-      <Box bg="#fff4e7">
+      <Box
+        bg="#fff4e7"
+        borderTopWidth={1}
+        borderStyle={"solid"}
+        borderColor={useColorModeValue("gray.200", "gray.700")}
+      >
         <Container as={Stack} maxW={"6xl"} py={10}>
           <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
             <Stack align={"flex-start"}>
@@ -40,11 +45,7 @@ function Footer() {
           </SimpleGrid>
         </Container>
 
-        <Box
-          borderTopWidth={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
-        >
+        <Box>
           <Container
             as={Stack}
             maxW={"6xl"}
@@ -55,7 +56,7 @@ function Footer() {
             align={{ md: "center" }}
           >
             <Text>
-              © {new Date().getFullYear()} Company. All rights reserved.
+              © {new Date().getFullYear()} Landa. All rights reserved.
             </Text>
             <Stack direction={"row"} spacing={6}></Stack>
           </Container>

@@ -5,6 +5,7 @@ import {
   Box,
   Heading,
   Image,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 export default function HomeBody() {
@@ -31,14 +32,21 @@ export default function HomeBody() {
             display="flex"
             flexDirection="column"
             alignItems="center"
-            bg="lightgoldenrodyellow"
-            borderRadius="15"
+            bgColor="rgba(255, 255, 139, 0.5)"
+            borderRadius="10"
             p={5}
           >
             <Heading size="xl">MESTRE PASSOS</Heading>
             <Text fontSize="3xl">COLEÇÃO</Text>
           </Box>
-          <Button colorScheme="yellow" size="lg">
+          <Button
+            color="black"
+            variant="solid"
+            bgColor="yellow.500"
+            _hover={{ bgColor: "yellow.600" }}
+            opacity="0.6"
+            size="lg"
+          >
             COMPRAR
           </Button>
         </Box>
