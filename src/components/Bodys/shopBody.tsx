@@ -1,24 +1,47 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { Box } from "@chakra-ui/react";
-import { ProductCard } from "@/components/Shop/ProductCard";
-import { products } from "@/components/Shop/_data";
-import { ProductGrid } from "@/components/Shop/ProductGrid";
+import {
+  ChakraProvider,
+  Box,
+  SimpleGrid,
+  VStack,
+  Button,
+  Flex,
+  Text,
+} from "@chakra-ui/react";
+import { products, Product } from "@/components/Shop/_data";
+import ProductCard from "../Shop/ProductCard";
 
-export default function HomeBody() {
+const ShopBody: React.FC = () => {
   return (
     <ChakraProvider>
-      <Box
-        maxW="7xl"
-        mx="auto"
-        px={{ base: "2", md: "4", lg: "6" }}
-        py={{ base: "3", md: "4", lg: "6" }}
-      >
-        <ProductGrid>
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </ProductGrid>
-      </Box>
+      <Flex gap={6} p={5} width="80%">
+        <VStack w={{ base: "full", md: "20%" }} spacing={1} align="flex-start">
+          <Text fontSize="xl" fontWeight="bold">
+            SHOP
+          </Text>
+          <Button color="black" colorScheme="transparent">
+            Todos
+          </Button>
+          <Button color="black" colorScheme="transparent">
+            COLEÇÃO 1
+          </Button>
+          <Button color="black" colorScheme="transparent">
+            COLEÇÃO 2
+          </Button>
+          <Button color="black" colorScheme="transparent">
+            COLEÇÃO 3
+          </Button>
+        </VStack>
+
+        <Box>
+          <SimpleGrid columns={3} spacing={5}>
+            {products.map((product: Product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </SimpleGrid>
+        </Box>
+      </Flex>
     </ChakraProvider>
   );
-}
+};
+
+export default ShopBody;

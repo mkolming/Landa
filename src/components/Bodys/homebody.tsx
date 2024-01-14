@@ -18,7 +18,7 @@ export default function HomeBody() {
         alignItems="center"
         gap={5}
       >
-        <Image src="landa 1.jpg" width="100%" />
+        <Image src="mestre passos.jpg" width="100%" />
         <Box
           position="absolute"
           top="40%"

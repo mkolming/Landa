@@ -1,66 +1,30 @@
-import {
-  ChakraProvider,
-  AspectRatio,
-  Box,
-  Button,
-  HStack,
-  Image,
-  Link,
-  Skeleton,
-  Stack,
-  StackProps,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { PriceTag } from "./PriceTag";
+import { Box, AspectRatio, Image, Text } from "@chakra-ui/react";
 import { Product } from "./_data";
 
-interface Props {
+interface ProductCardProps {
   product: Product;
-  rootProps?: StackProps;
 }
 
-export const ProductCard = (props: Props) => {
-  const { product, rootProps } = props;
-  const { name, imageUrl, price, salePrice } = product;
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
-    <ChakraProvider>
-      <Stack spacing={{ base: "4", md: "5" }} {...rootProps}>
-        <Box position="relative">
-          <AspectRatio ratio={4 / 3}>
-            <Image
-              src={imageUrl}
-              alt={name}
-              draggable="false"
-              fallback={<Skeleton />}
-              borderRadius={{ base: "md", md: "xl" }}
-            />
-          </AspectRatio>
-        </Box>
-        <Stack>
-          <Stack spacing="1">
-            <Text
-              fontWeight="medium"
-              color={useColorModeValue("gray.700", "gray.400")}
-            >
-              {name}
-            </Text>
-            <PriceTag price={price} salePrice={salePrice} currency="USD" />
-          </Stack>
-        </Stack>
-        <Stack align="center">
-          <Button colorScheme="blue" width="full">
-            Add to cart
-          </Button>
-          <Link
-            textDecoration="underline"
-            fontWeight="medium"
-            color={useColorModeValue("gray.600", "gray.400")}
-          >
-            Quick shop
-          </Link>
-        </Stack>
-      </Stack>
-    </ChakraProvider>
+    <Box borderRadius="3px">
+      <Image src={product.imageUrl} alt={product.name} />
+      <Box p="6">
+        <Text
+          fontWeight="bold"
+          textTransform="uppercase"
+          fontSize="sm"
+          color="gray.700"
+          align="center"
+        >
+          {product.name}
+        </Text>
+        <Text color="gray.500" align="center">
+          {product.currency} {product.price}
+        </Text>
+      </Box>
+    </Box>
   );
 };
+
+export default ProductCard;

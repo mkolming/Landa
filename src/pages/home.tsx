@@ -48,32 +48,32 @@ function Home() {
                   borderBottom="2px solid #CBD5E0"
                   _selected={{ borderBottom: "3px solid #3182CE" }}
                 >
-                  <Text>SHOP</Text>
+                  <Text fontFamily="Menlo">SHOP</Text>
                 </Tab>
                 <Tab
                   borderBottom="2px solid #CBD5E0"
                   _selected={{ borderBottom: "3px solid #3182CE" }}
                 >
-                  <Text>COLEÇÕES</Text>
+                  <Text fontFamily="Menlo">COLEÇÕES</Text>
                 </Tab>
                 <Tab
                   borderBottom="2px solid #CBD5E0"
                   _selected={{ borderBottom: "3px solid #3182CE" }}
                 >
-                  <Text>SOBRE</Text>
+                  <Text fontFamily="Menlo">SOBRE</Text>
                 </Tab>
                 <Tab
                   borderBottom="2px solid #CBD5E0"
                   _selected={{ borderBottom: "3px solid #3182CE" }}
                 >
-                  <Text>CONTATO</Text>
+                  <Text fontFamily="Menlo">CONTATO</Text>
                 </Tab>
               </TabList>
               <TabPanels>
                 <TabPanel p={0}>
                   <HomeBody />
                 </TabPanel>
-                <TabPanel>
+                <TabPanel display="flex" justifyContent="center">
                   <ShopBody />
                 </TabPanel>
                 <TabPanel>
