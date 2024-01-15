@@ -21,7 +21,7 @@ export default function HomeBody() {
 
   return (
     <Flex width="full" pb={45}>
-      <Box width="65%">
+      <Box width="70%">
         <Swiper
           modules={[Navigation, Pagination]}
           slidesPerView={slidesPerView}
@@ -110,16 +110,16 @@ export default function HomeBody() {
       </Box>
 
       <Flex
-        width="35%"
+        width="30%"
         flexDirection="column"
         justifyContent="space-between"
         px={6}
       >
-        <Text className={styles.p} fontSize="6xl" textAlign="center">
+        <Text className={styles.p} fontSize="5xl" textAlign="center">
           Ateliê de design artesanal que nasceu com a ideia de criar produtos em
           cerâmica fria aplicados a objetos tradicionais e contemporâneos.
         </Text>
-        <Text className={styles.p} fontSize="5xl" textAlign="center">
+        <Text className={styles.p} fontSize="4xl" textAlign="center">
           Tudo é esculpido à mão, por isso nunca dois modelos serão iguais.
         </Text>
       </Flex>

@@ -1,66 +1,57 @@
 export const products = [
   {
     id: "1",
-    name: "Bamboo Tan",
+    name: "Ceramic Tan",
     currency: "R$",
     price: "199,90",
-    imageUrl:
-      "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    imageUrl: "imgItems/ce1.jpg",
 
     description:
       "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
   },
   {
     id: "2",
-    name: "Iconic Turquoise",
+    name: "seashell",
     currency: "R$",
     price: "199,90",
-    imageUrl:
-      "https://images.unsplash.com/photo-1509941943102-10c232535736?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    imageUrl: "imgItems/ce2.jpg",
 
     description:
       "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
   },
   {
     id: "3",
-    name: "Marble Leather",
+    name: "Sea Star",
     currency: "R$",
     price: "199,90",
-    imageUrl:
-      "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-
+    imageUrl: "imgItems/ce3.jpg",
     description:
       "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
   },
   {
     id: "4",
-    name: "Silve wolf",
+    name: "sewn wood",
     currency: "R$",
     price: "199,90",
-    imageUrl:
-      "https://images.unsplash.com/photo-1602024242516-fbc9d4fda4b6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    imageUrl: "imgItems/mp 1.jpg",
     description:
       "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
   },
   {
     id: "5",
-    name: "Produto 1",
+    name: "wooden slat",
     currency: "R$",
     price: "199,90",
-    imageUrl:
-      "https://images.unsplash.com/photo-1509941943102-10c232535736?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-
+    imageUrl: "imgItems/mp2.jpg",
     description:
       "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
   },
   {
     id: "6",
-    name: "Produto 2",
+    name: "swing tree",
     currency: "R$",
     price: "199,90",
-    imageUrl:
-      "https://images.unsplash.com/photo-1564594985645-4427056e22e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-
+    imageUrl: "imgItems/mp3.jpg",
     description:
       "With a sleek design and a captivating essence, this is a modern Classic made for every occasion.",
   },

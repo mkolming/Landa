@@ -23,3 +23,19 @@
   font-weight: 800;
   font-size: large;
 }
+
+.itemsContent {
+  display: flex;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.itemsContentVisible {
+  max-height: 1000px;
+}

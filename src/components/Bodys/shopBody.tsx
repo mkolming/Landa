@@ -10,8 +10,16 @@ import {
 import { products, Product } from "@/components/Shop/_data";
 import ProductCard from "../Shop/ProductCard";
 import styles from "@/styles/home.module.css";
+import { useState } from "react";
 
 const ShopBody: React.FC = () => {
+  const [showItems, setShowItems] = useState(true);
+  const [HideShow, setHideShow] = useState(true);
+
+  const toggleItems = () => {
+    setShowItems(!showItems);
+    setHideShow(!HideShow);
+  };
   return (
     <ChakraProvider>
       <Flex gap={5} p={5} width="80%">
@@ -21,7 +29,6 @@ const ShopBody: React.FC = () => {
           </Text>
           <Box borderY="1px" w="100%">
             <Button
-              mb={5}
               w="100%"
               className={styles.p}
               fontSize="3xl"
@@ -30,49 +37,57 @@ const ShopBody: React.FC = () => {
               justifyContent="space-between"
             >
               Filtros
-              <Text fontSize="8x1">-</Text>
+              <Text onClick={toggleItems} fontSize="8x1">
+                -
+              </Text>
             </Button>
-
-            <Button
-              w="100%"
-              className={styles.p}
-              fontSize="4xl"
-              color="black"
-              colorScheme="transparent"
-              justifyContent="flex-start"
+            <Box
+              className={`${styles.itemsContent} ${
+                showItems ? styles.itemsContentVisible : ""
+              }`}
             >
-              Todos
-            </Button>
-            <Button
-              w="100%"
-              className={styles.p}
-              fontSize="2xl"
-              color="black"
-              colorScheme="transparent"
-              justifyContent="flex-start"
-            >
-              COLEÇÃO 1
-            </Button>
-            <Button
-              w="100%"
-              className={styles.p}
-              fontSize="2xl"
-              color="black"
-              colorScheme="transparent"
-              justifyContent="flex-start"
-            >
-              COLEÇÃO 2
-            </Button>
-            <Button
-              w="100%"
-              className={styles.p}
-              fontSize="2xl"
-              color="black"
-              colorScheme="transparent"
-              justifyContent="flex-start"
-            >
-              COLEÇÃO 3
-            </Button>
+              <Button
+                mt={5}
+                w="100%"
+                className={styles.p}
+                fontSize="4xl"
+                color="black"
+                colorScheme="transparent"
+                justifyContent="flex-start"
+              >
+                Todos
+              </Button>
+              <Button
+                w="100%"
+                className={styles.p}
+                fontSize="2xl"
+                color="black"
+                colorScheme="transparent"
+                justifyContent="flex-start"
+              >
+                cerâmica esmaltada
+              </Button>
+              <Button
+                w="100%"
+                className={styles.p}
+                fontSize="2xl"
+                color="black"
+                colorScheme="transparent"
+                justifyContent="flex-start"
+              >
+                Mestre Passos
+              </Button>
+              <Button
+                w="100%"
+                className={styles.p}
+                fontSize="2xl"
+                color="black"
+                colorScheme="transparent"
+                justifyContent="flex-start"
+              >
+                Florescer
+              </Button>
+            </Box>
           </Box>
         </VStack>
 

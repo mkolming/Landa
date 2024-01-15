@@ -18,29 +18,31 @@ function Footer() {
       borderStyle={"solid"}
       borderColor={useColorModeValue("gray.200", "gray.700")}
     >
-      <Container as={Stack} maxW={"6xl"} py={10}>
-        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
+      <Container as={Stack} maxW={"7xl"} py={10}>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 5 }} spacing={8}>
           <Stack align={"flex-start"}>
-            <Text fontWeight={"bold"}>PRE-SALE FAQS</Text>
-            <Link href={"#"}>Submit a Ticket</Link>
+            <Text fontWeight={"bold"}>FAQS</Text>
+            <Link href={"#"}>Pagamento</Link>
+            <Link href={"#"}>Garantia</Link>
           </Stack>
 
           <Stack align={"flex-start"}>
-            <Text fontWeight={"bold"}>SERVICES</Text>
-            <Link href={"#"}>Theme Tweak</Link>
+            <Text fontWeight={"bold"}>SERVIÇOS</Text>
+            <Link href={"#"}>Loja</Link>
           </Stack>
 
           <Stack align={"flex-start"}>
-            <Text fontWeight={"bold"}>SHOWCASE</Text>
-            <Link href={"#"}>Widget Kit</Link>
-            <Link href={"#"}>Support</Link>
+            <Text fontWeight={"bold"}>COLEÇÕES</Text>
+            <Link href={"#"}>Cerâmica esmaltada</Link>
+            <Link href={"#"}>Mestre Passos</Link>
           </Stack>
 
           <Stack align={"flex-start"}>
             <Text fontWeight={"bold"}>ABOUT US</Text>
-            <Link href={"#"}>Contact Us</Link>
-            <Link href={"#"}>Resources</Link>
+            <Link href={"#"}>Sobre</Link>
+            <Link href={"#"}>Contato</Link>
           </Stack>
+          <Image src="/landa logo.jpg" w="70%" />
         </SimpleGrid>
       </Container>
 

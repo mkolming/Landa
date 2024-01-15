@@ -47,7 +47,7 @@ export default function TabsHome() {
     setTimeout(() => {
       setTabIndex(index);
       setAnimatingOut(false);
-    }, 1000);
+    }, 700);
   };
 
   const fonte: string = "a";
@@ -139,7 +139,7 @@ export default function TabsHome() {
           <TabPanel
             p={0}
             animation={
-              animatingOut ? "fadeOut 1s ease-out" : "fadeIn 1s ease-in-out"
+              animatingOut ? "fadeOut 0.7s ease-out" : "fadeIn 0.7s ease-in-out"
             }
           >
             <HomeBody />
@@ -148,28 +148,28 @@ export default function TabsHome() {
             display="flex"
             justifyContent="center"
             animation={
-              animatingOut ? "fadeOut 1s ease-out" : "fadeIn 1s ease-in-out"
+              animatingOut ? "fadeOut 0.7s ease-out" : "fadeIn 0.7s ease-in-out"
             }
           >
             <ShopBody />
           </TabPanel>
           <TabPanel
             animation={
-              animatingOut ? "fadeOut 1s ease-out" : "fadeIn 1s ease-in-out"
+              animatingOut ? "fadeOut 0.7s ease-out" : "fadeIn 0.7s ease-in-out"
             }
           >
             <ColectionsBody />
           </TabPanel>
           <TabPanel
             animation={
-              animatingOut ? "fadeOut 1s ease-out" : "fadeIn 1s ease-in-out"
+              animatingOut ? "fadeOut 0.7s ease-out" : "fadeIn 0.7s ease-in-out"
             }
           >
             <AboutBody />
           </TabPanel>
           <TabPanel
             animation={
-              animatingOut ? "fadeOut 1s ease-out" : "fadeIn 1s ease-in-out"
+              animatingOut ? "fadeOut 0.7s ease-out" : "fadeIn 0.7s ease-in-out"
             }
           >
             <ContactBody />
