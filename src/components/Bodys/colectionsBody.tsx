@@ -1,13 +1,11 @@
 import {
-  ChakraProvider,
   Box,
   Text,
   Button,
-  Heading,
   Image,
   Flex,
   useBreakpointValue,
-  IconButton,
+  AspectRatio,
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,23 +14,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/swiper-bundle.css";
+import styles from "@/styles/home.module.css";
 
 export default function HomeBody() {
   const slidesPerView = useBreakpointValue({ base: 1, md: 1 });
 
   return (
-    <ChakraProvider>
-      <Box width="full">
-        {/* Texto descritivo */}
-        <Text px={6} py={4}>
-          Ateliê de design artesanal que nasceu com a ideia de criar produtos em
-          cerâmica fria aplicados a objetos tradicionais e contemporâneos.
-        </Text>
-        <Text px={6}>
-          Tudo é esculpido à mão, por isso nunca dois modelos serão iguais.
-        </Text>
-
-        {/* Slider */}
+    <Flex width="full" pb={45}>
+      <Box width="65%">
         <Swiper
           modules={[Navigation, Pagination]}
           slidesPerView={slidesPerView}
@@ -40,46 +29,100 @@ export default function HomeBody() {
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
         >
-          {/* Slide 1 */}
           <SwiperSlide>
-            <Image src="florescer 1.jpg" width="full" />
+            <AspectRatio w="100%" ratio={16 / 10}>
+              <Image src="florescer 1.jpg" objectFit="cover" />
+            </AspectRatio>
+
             <Flex
               position="absolute"
               top="50%"
               right="10%"
               transform="translateY(-50%)"
               direction="column"
-              alignItems="flex-start"
+              alignItems="flex-end"
+              gap={2}
             >
-              <Heading size="lg" mb={4}>
-                COLEÇÃO FLORESCER
-              </Heading>
-              <Button as="a" href="/colecao-zumaia">
-                READ MORE
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="flex-start"
+                bgColor="rgba(255, 255, 255, 0.4)"
+                borderRadius={5}
+                p={5}
+              >
+                <Text className={styles.p} fontSize="5xl">
+                  COLEÇÃO FLORESCER
+                </Text>
+              </Box>
+              <Button
+                className={styles.p}
+                fontSize="3xl"
+                color="black"
+                variant="solid"
+                bgColor="rgba(255, 255, 255, 0.7)"
+                _hover={{ bgColor: "rgba(255, 255, 255, 0.9)" }}
+                size="lg"
+              >
+                LER MAIS
               </Button>
             </Flex>
           </SwiperSlide>
           <SwiperSlide>
-            <Image src="landa 1.jpg" width="full" />
+            <AspectRatio w="100%" ratio={16 / 10}>
+              <Image src="landa 1.jpg" objectFit="cover" />
+            </AspectRatio>
             <Flex
               position="absolute"
               top="50%"
               right="10%"
               transform="translateY(-50%)"
               direction="column"
-              alignItems="flex-start"
+              alignItems="flex-end"
+              gap={2}
             >
-              <Heading size="lg" mb={4}>
-                COLEÇÃO CERAMICA ESMALTADA
-              </Heading>
-              <Button as="a" href="/colecao-zumaia">
-                READ MORE
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="flex-start"
+                bgColor="rgba(255, 255, 255, 0.4)"
+                borderRadius={5}
+                p={5}
+              >
+                <Text className={styles.p} fontSize="5xl">
+                  CERAMICA ESMALTADA
+                </Text>
+              </Box>
+              <Button
+                className={styles.p}
+                fontSize="3xl"
+                color="black"
+                variant="solid"
+                bgColor="rgba(255, 255, 255, 0.7)"
+                _hover={{ bgColor: "rgba(255, 255, 255, 0.9)" }}
+                size="lg"
+              >
+                LER MAIS
               </Button>
             </Flex>
           </SwiperSlide>
-          {/* Repetir SwiperSlide para cada item da coleção */}
         </Swiper>
       </Box>
-    </ChakraProvider>
+
+      <Flex
+        width="35%"
+        flexDirection="column"
+        justifyContent="space-between"
+        px={6}
+      >
+        <Text className={styles.p} fontSize="6xl" textAlign="center">
+          Ateliê de design artesanal que nasceu com a ideia de criar produtos em
+          cerâmica fria aplicados a objetos tradicionais e contemporâneos.
+        </Text>
+        <Text className={styles.p} fontSize="5xl" textAlign="center">
+          Tudo é esculpido à mão, por isso nunca dois modelos serão iguais.
+        </Text>
+      </Flex>
+    </Flex>
   );
 }

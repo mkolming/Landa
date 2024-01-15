@@ -5,8 +5,9 @@ import {
   Box,
   Heading,
   Image,
-  useColorModeValue,
+  AspectRatio,
 } from "@chakra-ui/react";
+import styles from "@/styles/home.module.css";
 
 export default function HomeBody() {
   return (
@@ -18,10 +19,12 @@ export default function HomeBody() {
         alignItems="center"
         gap={5}
       >
-        <Image src="mestre passos.jpg" width="100%" />
+        <AspectRatio w="100%" ratio={16 / 9}>
+          <Image src="mestre passos.jpg" objectFit="cover" />
+        </AspectRatio>
         <Box
           position="absolute"
-          top="40%"
+          top="30%"
           transform="translateX(150%)"
           display="flex"
           flexDirection="column"
@@ -32,19 +35,26 @@ export default function HomeBody() {
             display="flex"
             flexDirection="column"
             alignItems="center"
-            bgColor="rgba(255, 255, 139, 0.5)"
-            borderRadius="10"
+            bgColor="rgba(255, 255, 255, 0.3)"
+            borderRadius={4}
             p={5}
+            borderWidth={5}
           >
-            <Heading size="xl">MESTRE PASSOS</Heading>
-            <Text fontSize="3xl">COLEÇÃO</Text>
+            <Text className={styles.p} fontSize="6xl">
+              MESTRE PASSOS
+            </Text>
+            <Text className={styles.p} fontSize="3xl">
+              COLEÇÃO
+            </Text>
           </Box>
           <Button
+            className={styles.p}
+            fontSize="3xl"
+            borderRadius={4}
             color="black"
             variant="solid"
-            bgColor="yellow.500"
-            _hover={{ bgColor: "yellow.600" }}
-            opacity="0.6"
+            bgColor="rgba(255, 255, 255, 0.5)"
+            _hover={{ bgColor: "rgba(255, 255, 255, 0.7)" }}
             size="lg"
           >
             COMPRAR
