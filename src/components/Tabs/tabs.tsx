@@ -6,7 +6,7 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Global, css } from "@emotion/react";
 import ContactBody from "../Bodys/contactBody";
 import ColectionsBody from "../Bodys/colectionsBody";
@@ -14,6 +14,7 @@ import ShopBody from "../Bodys/shopBody";
 import AboutBody from "../Bodys/aboutBody";
 import HomeBody from "../Bodys/homebody";
 import styles from "@/styles/home.module.css";
+import Cart from "../Cart/cart";
 
 const GlobalStyles = () => (
   <Global
@@ -38,11 +39,15 @@ const GlobalStyles = () => (
   />
 );
 
-export default function TabsHome() {
-  const [tabIndex, setTabIndex] = useState(0);
+interface TabsHomeProps {
+  tabIndex: number;
+  setTabIndex: (index: number) => void;
+}
+
+const TabsHome: React.FC<TabsHomeProps> = ({ tabIndex, setTabIndex }) => {
   const [animatingOut, setAnimatingOut] = useState(false);
 
-  const handleTabsChange = (index: React.SetStateAction<number>) => {
+  const handleTabsChange = (index: number) => {
     setAnimatingOut(true);
     setTimeout(() => {
       setTabIndex(index);
@@ -50,7 +55,14 @@ export default function TabsHome() {
     }, 700);
   };
 
-  const fonte: string = "a";
+  const goToNewPage = () => {
+    setAnimatingOut(true);
+    setTimeout(() => {
+      setTabIndex(5); // O índice 5 representa a nova página/tab
+      setAnimatingOut(false);
+    }, 700);
+  };
+
   return (
     <>
       <GlobalStyles />
@@ -161,6 +173,8 @@ export default function TabsHome() {
             <ColectionsBody />
           </TabPanel>
           <TabPanel
+            display="flex"
+            justifyContent="center"
             animation={
               animatingOut ? "fadeOut 0.7s ease-out" : "fadeIn 0.7s ease-in-out"
             }
@@ -168,14 +182,26 @@ export default function TabsHome() {
             <AboutBody />
           </TabPanel>
           <TabPanel
+            display="flex"
+            justifyContent="center"
             animation={
               animatingOut ? "fadeOut 0.7s ease-out" : "fadeIn 0.7s ease-in-out"
             }
           >
             <ContactBody />
           </TabPanel>
+          <TabPanel
+            display={tabIndex === 5 ? "block" : "none"}
+            animation={
+              animatingOut ? "fadeOut 0.7s ease-out" : "fadeIn 0.7s ease-in-out"
+            }
+          >
+            <Cart />
+          </TabPanel>
         </TabPanels>
       </Tabs>
     </>
   );
-}
+};
+
+export default TabsHome;

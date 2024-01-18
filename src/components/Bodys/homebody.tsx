@@ -19,7 +19,7 @@ export default function HomeBody() {
         alignItems="center"
         gap={5}
       >
-        <AspectRatio w="100%" ratio={16 / 9}>
+        <AspectRatio w="102%" ratio={16 / 9}>
           <Image src="mestre passos.jpg" objectFit="cover" />
         </AspectRatio>
         <Box

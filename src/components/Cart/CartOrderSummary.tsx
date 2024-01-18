@@ -9,6 +9,7 @@ import {
   useColorModeValue as mode,
 } from "@chakra-ui/react";
 import { formatPrice } from "./PriceTag";
+import styles from "@/styles/home.module.css";
 
 type OrderSummaryItemProps = {
   label: string;
@@ -20,10 +21,20 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
   const { label, value, children } = props;
   return (
     <Flex justify="space-between" fontSize="sm">
-      <Text fontWeight="medium" color={mode("gray.600", "gray.400")}>
+      <Text
+        className={styles.p}
+        fontSize="xl"
+        color={mode("gray.600", "gray.400")}
+      >
         {label}
       </Text>
-      {value ? <Text fontWeight="medium">{value}</Text> : children}
+      {value ? (
+        <Text className={styles.p} fontSize="2xl">
+          {value}
+        </Text>
+      ) : (
+        children
+      )}
     </Flex>
   );
 };
@@ -38,35 +49,42 @@ export const CartOrderSummary = () => {
         padding="8"
         width="full"
       >
-        <Heading size="md">Order Summary</Heading>
+        <Text className={styles.p} fontSize="4xl">
+          Order Summary
+        </Text>
 
         <Stack spacing="6">
           <OrderSummaryItem label="Subtotal" value={formatPrice(597)} />
           <OrderSummaryItem label="Shipping + Tax">
-            <Link href="#" textDecor="underline">
+            <Link
+              className={styles.p}
+              fontSize="xl"
+              href="#"
+              textDecor="underline"
+            >
               Calculate shipping
             </Link>
           </OrderSummaryItem>
           <OrderSummaryItem label="Coupon Code">
-            <Link href="#" textDecor="underline">
+            <Link
+              className={styles.p}
+              fontSize="xl"
+              href="#"
+              textDecor="underline"
+            >
               Add coupon code
             </Link>
           </OrderSummaryItem>
           <Flex justify="space-between">
-            <Text fontSize="lg" fontWeight="semibold">
+            <Text className={styles.p} fontSize="xl">
               Total
             </Text>
-            <Text fontSize="xl" fontWeight="extrabold">
+            <Text className={styles.p} fontSize="3xl">
               {formatPrice(597)}
             </Text>
           </Flex>
         </Stack>
-        <Button
-          colorScheme="blue"
-          size="lg"
-          fontSize="md"
-          //rightIcon=""
-        >
+        <Button colorScheme="blue" className={styles.p} fontSize="2xl">
           Checkout
         </Button>
       </Stack>

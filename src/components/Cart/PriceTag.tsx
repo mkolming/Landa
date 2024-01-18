@@ -6,6 +6,7 @@ import {
   useColorModeValue as mode,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
+import styles from "@/styles/home.module.css";
 
 interface PriceTagProps {
   currency: string;
@@ -61,8 +62,9 @@ const Price = (props: PriceProps) => {
   const color = isOnSale ? onSaleColor : defaultColor;
   return (
     <Text
+      className={styles.p}
+      fontSize="2xl"
       as="span"
-      fontWeight="medium"
       color={color}
       textDecoration={isOnSale ? "line-through" : "none"}
       {...textProps}
@@ -74,8 +76,9 @@ const Price = (props: PriceProps) => {
 
 const SalePrice = (props: TextProps) => (
   <Text
+    className={styles.p}
+    fontSize="2xl"
     as="span"
-    fontWeight="semibold"
     color={mode("gray.800", "gray.100")}
     {...props}
   />

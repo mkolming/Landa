@@ -12,12 +12,6 @@
   font-size: xx-large;
 }
 
-.heading {
-  font-family: "Amatic SC", sans-serif;
-  font-weight: 800;
-  font-size: xx-large;
-}
-
 .p {
   font-family: "Amatic SC", sans-serif;
   font-weight: 800;
@@ -38,4 +32,11 @@
 
 .itemsContentVisible {
   max-height: 1000px;
+}
+
+.maxSize {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1920px;
 }
