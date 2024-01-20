@@ -1,38 +1,47 @@
 import React, { useState } from "react";
 
 export default function Home() {
-  const [nome, setNome] = useState("");
+  const [formData, setFormData] = useState({
+    nome: '',
+    image: '',
+    price: '',
+    colection_id: '',
+    description: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch("http://127.0.0.1:8000/api/store-data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ nome }),
-    });
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/store-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
 
-    if (response.ok) {
-      // Tratar resposta de sucesso
-      console.log("Dados enviados com sucesso");
-    } else {
-      // Tratar erros
-      console.log("Erro ao enviar dados");
+      if (!response.ok) {
+        throw new Error('Erro ao enviar os dados');
+      }
+
+      console.log('Dados enviados com sucesso');
+    } catch (error) {
+      console.error('Falha ao enviar os dados:', error);
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          placeholder="Nome"
-        />
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input type="text" name="nome" value={formData.nome} onChange={handleChange} placeholder="Nome do Produto" /><br />
+      <input type="text" name="image" value={formData.image} onChange={handleChange} placeholder="URL da Imagem" /><br />
+      <input type="text" name="price" value={formData.price} onChange={handleChange} placeholder="Preço" /><br />
+      <input type="text" name="colection_id" value={formData.colection_id} onChange={handleChange} placeholder="ID da Coleção" /><br />
+      <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Descrição do Produto" /><br />
+      <button type="submit">Enviar</button>
+    </form>
   );
 }
