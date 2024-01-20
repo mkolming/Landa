@@ -1,15 +1,24 @@
-import { Box, AspectRatio, Image, Text } from "@chakra-ui/react";
-import { Product } from "./_data";
+import { Box, Image, Text } from "@chakra-ui/react";
 import styles from "@/styles/home.module.css";
+import React, { useState, useEffect } from "react";
+
+interface DataModel {
+  id: number;
+  nome: string;
+  currency: string;
+  price: number;
+  image: string;
+  colection: string;
+}
 
 interface ProductCardProps {
-  product: Product;
+  product: DataModel;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <Box borderRadius="3px">
-      <Image src={product.imageUrl} alt={product.name} />
+      <Image src={product.image} alt={product.nome} />
       <Box p="6">
         <Text
           className={styles.p}
@@ -17,7 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           color="gray.900"
           align="center"
         >
-          {product.name}
+          {product.nome}
         </Text>
         <Text
           className={styles.p}

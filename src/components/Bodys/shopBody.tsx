@@ -7,12 +7,21 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
-import { products, Product } from "@/components/Shop/_data";
 import ProductCard from "../Shop/ProductCard";
 import styles from "@/styles/home.module.css";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+interface DataModel {
+  id: number;
+  nome: string;
+  currency: string;
+  price: number;
+  image: string;
+  colection: string;
+}
 
 const ShopBody: React.FC = () => {
+  const [dataModels, setDataModels] = useState<DataModel[]>([]);
   const [showItems, setShowItems] = useState(true);
   const [HideShow, setHideShow] = useState(true);
 
@@ -20,6 +29,21 @@ const ShopBody: React.FC = () => {
     setShowItems(!showItems);
     setHideShow(!HideShow);
   };
+
+  useEffect(() => {
+    const fetchDataModels = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/data-models"); // Sua URL da API
+        const data = await response.json();
+        setDataModels(data);
+      } catch (error) {
+        console.error("Erro ao buscar DataModels:", error);
+      }
+    };
+
+    fetchDataModels();
+  }, []);
+
   return (
     <ChakraProvider>
       <Flex gap={5} p={5} width="80%">
@@ -93,8 +117,8 @@ const ShopBody: React.FC = () => {
 
         <Box>
           <SimpleGrid columns={3} spacing={5}>
-            {products.map((product: Product) => (
-              <ProductCard key={product.id} product={product} />
+            {dataModels.map((model) => (
+              <ProductCard key={model.id} product={model} />
             ))}
           </SimpleGrid>
         </Box>
