@@ -88,7 +88,7 @@ const ShopBody: React.FC = () => {
           <Text className={styles.p} fontSize="6xl">
             SHOP
           </Text>
-          <Box borderY="1px" w="100%">
+          <Box borderY="1px" maxW="166px" w="100%">
             <Button
               w="100%"
               className={styles.p}
