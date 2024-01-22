@@ -5,9 +5,11 @@ import React, { useState, useEffect } from "react";
 interface DataModel {
   id: number;
   nome: string;
+  image: string;
   currency: string;
   price: number;
-  image: string;
+  sell_status: string;
+  description: string;
   colection: string;
 }
 
@@ -15,7 +17,7 @@ interface ProductCardProps {
   product: DataModel;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<{ product: DataModel }> = ({ product }) => {
   return (
     <Box borderRadius="3px">
       <Image src={product.image} alt={product.nome} />

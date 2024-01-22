@@ -14,9 +14,11 @@ import React, { useState, useEffect } from "react";
 interface DataModel {
   id: number;
   nome: string;
+  image: string;
   currency: string;
   price: number;
-  image: string;
+  sell_status: string;
+  description: string;
   colection: string;
 }
 
@@ -24,6 +26,7 @@ const ShopBody: React.FC = () => {
   const [dataModels, setDataModels] = useState<DataModel[]>([]);
   const [showItems, setShowItems] = useState(true);
   const [HideShow, setHideShow] = useState(true);
+  const [currentFilter, setCurrentFilter] = useState<string | null>(null);
 
   const toggleItems = () => {
     setShowItems(!showItems);
@@ -43,6 +46,14 @@ const ShopBody: React.FC = () => {
 
     fetchDataModels();
   }, []);
+
+  const handleFilterChange = (filter: string | null) => {
+    setCurrentFilter(filter);
+  };
+
+  const filteredDataModels = currentFilter
+    ? dataModels.filter((model) => model.colection === currentFilter)
+    : dataModels;
 
   return (
     <ChakraProvider>
@@ -78,6 +89,7 @@ const ShopBody: React.FC = () => {
                 color="black"
                 colorScheme="transparent"
                 justifyContent="flex-start"
+                onClick={() => handleFilterChange(null)}
               >
                 Todos
               </Button>
@@ -88,6 +100,7 @@ const ShopBody: React.FC = () => {
                 color="black"
                 colorScheme="transparent"
                 justifyContent="flex-start"
+                onClick={() => handleFilterChange('1')}
               >
                 cerâmica esmaltada
               </Button>
@@ -98,6 +111,7 @@ const ShopBody: React.FC = () => {
                 color="black"
                 colorScheme="transparent"
                 justifyContent="flex-start"
+                onClick={() => handleFilterChange('2')}
               >
                 Mestre Passos
               </Button>
@@ -116,11 +130,11 @@ const ShopBody: React.FC = () => {
         </VStack>
 
         <Box>
-          <SimpleGrid columns={3} spacing={5}>
-            {dataModels.map((model) => (
-              <ProductCard key={model.id} product={model} />
-            ))}
-          </SimpleGrid>
+        <SimpleGrid columns={3} spacing={10}>
+  {filteredDataModels.map((model) => (
+    <ProductCard key={model.id} product={model} />
+  ))}
+</SimpleGrid>
         </Box>
       </Flex>
     </ChakraProvider>

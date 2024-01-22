@@ -5,8 +5,8 @@ export default function Home() {
     nome: '',
     image: '',
     price: '',
-    colection_id: '',
-    description: ''
+    colection: '',
+    description: '',
   });
 
   const handleChange = (e) => {
@@ -39,7 +39,7 @@ export default function Home() {
       <input type="text" name="nome" value={formData.nome} onChange={handleChange} placeholder="Nome do Produto" /><br />
       <input type="text" name="image" value={formData.image} onChange={handleChange} placeholder="URL da Imagem" /><br />
       <input type="text" name="price" value={formData.price} onChange={handleChange} placeholder="Preço" /><br />
-      <input type="text" name="colection_id" value={formData.colection_id} onChange={handleChange} placeholder="ID da Coleção" /><br />
+      <input type="text" name="colection" value={formData.colection} onChange={handleChange} placeholder="Coleção" /><br />
       <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Descrição do Produto" /><br />
       <button type="submit">Enviar</button>
     </form>
