@@ -15,11 +15,15 @@ interface DataModel {
 
 interface ProductCardProps {
   product: DataModel;
+  onProductClick: (product: DataModel) => void;
 }
 
-const ProductCard: React.FC<{ product: DataModel }> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  onProductClick,
+}) => {
   return (
-    <Box borderRadius="3px">
+    <Box borderRadius="3px" onClick={() => onProductClick(product)}>
       <Image src={product.image} alt={product.nome} />
       <Box p="6">
         <Text

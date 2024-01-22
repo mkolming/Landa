@@ -6,10 +6,23 @@ import {
   Button,
   Flex,
   Text,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  Image,
+  Divider,
+  List,
+  ListIcon,
+  ListItem,
+  ModalFooter,
 } from "@chakra-ui/react";
 import ProductCard from "../Shop/ProductCard";
 import styles from "@/styles/home.module.css";
 import React, { useState, useEffect } from "react";
+import { MdCheckCircle } from "react-icons/md";
 
 interface DataModel {
   id: number;
@@ -24,9 +37,18 @@ interface DataModel {
 
 const ShopBody: React.FC = () => {
   const [dataModels, setDataModels] = useState<DataModel[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<DataModel | null>(
+    null
+  );
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showItems, setShowItems] = useState(true);
   const [HideShow, setHideShow] = useState(true);
   const [currentFilter, setCurrentFilter] = useState<string | null>(null);
+
+  const openModal = (product: DataModel) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
 
   const toggleItems = () => {
     setShowItems(!showItems);
@@ -54,6 +76,10 @@ const ShopBody: React.FC = () => {
   const filteredDataModels = currentFilter
     ? dataModels.filter((model) => model.colection === currentFilter)
     : dataModels;
+
+  const addToCart = (product: DataModel) => {
+    // Lógica para adicionar o produto ao carrinho
+  };
 
   return (
     <ChakraProvider>
@@ -100,7 +126,7 @@ const ShopBody: React.FC = () => {
                 color="black"
                 colorScheme="transparent"
                 justifyContent="flex-start"
-                onClick={() => handleFilterChange('1')}
+                onClick={() => handleFilterChange("1")}
               >
                 cerâmica esmaltada
               </Button>
@@ -111,7 +137,7 @@ const ShopBody: React.FC = () => {
                 color="black"
                 colorScheme="transparent"
                 justifyContent="flex-start"
-                onClick={() => handleFilterChange('2')}
+                onClick={() => handleFilterChange("2")}
               >
                 Mestre Passos
               </Button>
@@ -122,6 +148,7 @@ const ShopBody: React.FC = () => {
                 color="black"
                 colorScheme="transparent"
                 justifyContent="flex-start"
+                onClick={() => handleFilterChange("3")}
               >
                 Florescer
               </Button>
@@ -130,11 +157,82 @@ const ShopBody: React.FC = () => {
         </VStack>
 
         <Box>
-        <SimpleGrid columns={3} spacing={10}>
-  {filteredDataModels.map((model) => (
-    <ProductCard key={model.id} product={model} />
-  ))}
-</SimpleGrid>
+          <SimpleGrid columns={3} spacing={10}>
+            {filteredDataModels.map((model) => (
+              <ProductCard
+                key={model.id}
+                product={model}
+                onProductClick={openModal} // Certifique-se de que openModal aceita um DataModel e atualiza o estado
+              />
+            ))}
+          </SimpleGrid>
+
+          <Modal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            size="4xl"
+            isCentered
+          >
+            <ModalOverlay />
+            <ModalContent bgColor="#fff4e7" px={5} pt={5} pb={2}>
+              <ModalHeader className={styles.p} fontSize="4xl">
+                {selectedProduct?.nome}
+              </ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Box display="flex">
+                  <Box flexShrink={0}>
+                    <Image
+                      borderRadius="md"
+                      src={selectedProduct?.image}
+                      alt={selectedProduct?.nome}
+                      boxSize="500px"
+                      objectFit="cover"
+                      mr={6}
+                    />
+                  </Box>
+                  <Box flexGrow={1}>
+                    <Text className={styles.p} fontSize="3xl" mb={2}>
+                      <Text as="span" fontWeight="bold">
+                        Preço :{" "}
+                      </Text>
+                      {selectedProduct?.currency}
+                      {selectedProduct?.price}
+                    </Text>
+                    <Divider mb={2} />
+                    <Text
+                      className={styles.p}
+                      fontSize="2xl"
+                      fontWeight="bold"
+                      mb={2}
+                    >
+                      Características : {selectedProduct?.nome}
+                    </Text>
+                    <List spacing={2}>
+                      <ListItem className={styles.p} fontSize="2xl">
+                        Material : {selectedProduct?.nome}
+                      </ListItem>
+                    </List>
+                    <Text className={styles.p} fontSize="2xl" mt={4}>
+                      {selectedProduct?.description}
+                    </Text>
+                  </Box>
+                </Box>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button
+                  className={styles.p}
+                  fontSize="2xl"
+                  colorScheme="yellow"
+                  mr={3}
+                  onClick={() => selectedProduct && addToCart(selectedProduct)}
+                >
+                  Adicionar ao carrinho
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
         </Box>
       </Flex>
     </ChakraProvider>
