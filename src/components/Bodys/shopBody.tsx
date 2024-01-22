@@ -15,25 +15,14 @@ import {
   Image,
   Divider,
   List,
-  ListIcon,
   ListItem,
   ModalFooter,
 } from "@chakra-ui/react";
 import ProductCard from "../Shop/ProductCard";
 import styles from "@/styles/home.module.css";
 import React, { useState, useEffect } from "react";
-import { MdCheckCircle } from "react-icons/md";
-
-interface DataModel {
-  id: number;
-  nome: string;
-  image: string;
-  currency: string;
-  price: number;
-  sell_status: string;
-  description: string;
-  colection: string;
-}
+import { DataModel } from '../Hooks/types';
+import { addToCart, getCart } from "../Cart/cart-utils";
 
 const ShopBody: React.FC = () => {
   const [dataModels, setDataModels] = useState<DataModel[]>([]);
@@ -44,6 +33,7 @@ const ShopBody: React.FC = () => {
   const [showItems, setShowItems] = useState(true);
   const [HideShow, setHideShow] = useState(true);
   const [currentFilter, setCurrentFilter] = useState<string | null>(null);
+  const [cart, setCart] = useState<DataModel[]>(getCart());
 
   const openModal = (product: DataModel) => {
     setSelectedProduct(product);
@@ -55,6 +45,7 @@ const ShopBody: React.FC = () => {
     setHideShow(!HideShow);
   };
 
+  
   useEffect(() => {
     const fetchDataModels = async () => {
       try {
@@ -77,9 +68,12 @@ const ShopBody: React.FC = () => {
     ? dataModels.filter((model) => model.colection === currentFilter)
     : dataModels;
 
-  const addToCart = (product: DataModel) => {
-    // Lógica para adicionar o produto ao carrinho
-  };
+  function handleAddToCart(product: DataModel): void {
+    addToCart(product, () => {
+      setCart(getCart());
+      setIsModalOpen(false);
+    });
+  }
 
   return (
     <ChakraProvider>
@@ -226,7 +220,7 @@ const ShopBody: React.FC = () => {
                   fontSize="2xl"
                   colorScheme="yellow"
                   mr={3}
-                  onClick={() => selectedProduct && addToCart(selectedProduct)}
+                  onClick={() => selectedProduct && handleAddToCart(selectedProduct)}
                 >
                   Adicionar ao carrinho
                 </Button>
@@ -240,3 +234,4 @@ const ShopBody: React.FC = () => {
 };
 
 export default ShopBody;
+
