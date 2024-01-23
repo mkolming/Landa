@@ -11,6 +11,7 @@ import {
   Box,
   Text,
   Image,
+  CloseButton,
 } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import Cookies from "js-cookie";
@@ -99,9 +100,7 @@ function DrawerModel({ setTabIndex }: DrawerModelProps) {
                       {item.price}
                     </Text>
                   </Box>
-                  <Button onClick={() => handleRemoveFromCart(item.id)}>
-                    X
-                  </Button>
+                  <CloseButton onClick={() => handleRemoveFromCart(item.id)} />
                 </Box>
               ))
             ) : (

@@ -7,9 +7,11 @@ import {
   Image,
   Flex,
   Divider,
+  CloseButton,
 } from "@chakra-ui/react";
 import { getCartItems, getTotalPrice } from "./cart-utils";
 import { DataModel } from "../Hooks/types";
+import { removeFromCart } from "../Cart/cart-utils";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState<DataModel[]>([]);
@@ -22,8 +24,12 @@ const Cart = () => {
     setTotalPrice(total);
   }, []);
 
+  const handleRemoveFromCart = (productId: number) => {
+    removeFromCart(productId, setCartItems);
+  };
+
   return (
-    <Flex w="60%" justifyContent="space-between">
+    <Flex w="50%" justifyContent="space-between">
       <Stack spacing={8}>
         <Box>
           {cartItems.length === 0 ? (
@@ -38,13 +44,21 @@ const Cart = () => {
                 borderBottom="1px solid"
                 borderColor="gray.200"
               >
-                <Image boxSize="50px" src={item.image} alt={item.nome} />
-                <Box>
+                <Image
+                  src={item.image}
+                  alt={item.nome}
+                  boxSize="100px"
+                  objectFit="cover"
+                  mr={2}
+                />
+
+                <Box pl={5}>
                   <Text fontWeight="bold">{item.nome}</Text>
                   <Text fontSize="sm">{`${item.currency} ${item.price.toFixed(
                     2
                   )}`}</Text>
                 </Box>
+                <CloseButton onClick={() => handleRemoveFromCart(item.id)} />
               </Flex>
             ))
           )}
