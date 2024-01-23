@@ -14,7 +14,7 @@ import ShopBody from "../Bodys/shopBody";
 import AboutBody from "../Bodys/aboutBody";
 import HomeBody from "../Bodys/homebody";
 import styles from "@/styles/home.module.css";
-import Cart from "../Cart/cart";
+import Cart from "../Cart/Cart";
 
 const GlobalStyles = () => (
   <Global
@@ -191,7 +191,8 @@ const TabsHome: React.FC<TabsHomeProps> = ({ tabIndex, setTabIndex }) => {
             <ContactBody />
           </TabPanel>
           <TabPanel
-            display={tabIndex === 5 ? "block" : "none"}
+            display={tabIndex === 5 ? "flex" : "none"}
+            justifyContent="center"
             animation={
               animatingOut ? "fadeOut 0.7s ease-out" : "fadeIn 0.7s ease-in-out"
             }

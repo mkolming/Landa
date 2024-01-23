@@ -1,7 +1,7 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import styles from "@/styles/home.module.css";
-import React, { useState, useEffect } from "react";
-import { DataModel } from '../Hooks/types';
+import React from "react";
+import { DataModel } from "../Hooks/types";
 
 interface ProductCardProps {
   product: DataModel;

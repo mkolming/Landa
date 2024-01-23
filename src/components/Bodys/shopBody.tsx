@@ -17,12 +17,17 @@ import {
   List,
   ListItem,
   ModalFooter,
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
 } from "@chakra-ui/react";
 import ProductCard from "../Shop/ProductCard";
 import styles from "@/styles/home.module.css";
 import React, { useState, useEffect } from "react";
-import { DataModel } from '../Hooks/types';
+import { DataModel } from "../Hooks/types";
 import { addToCart, getCart } from "../Cart/cart-utils";
+import ConfirmationAlert from "../Modals/ConfirmationAlert";
 
 const ShopBody: React.FC = () => {
   const [dataModels, setDataModels] = useState<DataModel[]>([]);
@@ -34,10 +39,12 @@ const ShopBody: React.FC = () => {
   const [HideShow, setHideShow] = useState(true);
   const [currentFilter, setCurrentFilter] = useState<string | null>(null);
   const [cart, setCart] = useState<DataModel[]>(getCart());
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const openModal = (product: DataModel) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
+    setShowConfirmation(false);
   };
 
   const toggleItems = () => {
@@ -45,7 +52,6 @@ const ShopBody: React.FC = () => {
     setHideShow(!HideShow);
   };
 
-  
   useEffect(() => {
     const fetchDataModels = async () => {
       try {
@@ -71,7 +77,7 @@ const ShopBody: React.FC = () => {
   function handleAddToCart(product: DataModel): void {
     addToCart(product, () => {
       setCart(getCart());
-      setIsModalOpen(false);
+      setShowConfirmation(true);
     });
   }
 
@@ -212,6 +218,7 @@ const ShopBody: React.FC = () => {
                     </Text>
                   </Box>
                 </Box>
+                {showConfirmation && <ConfirmationAlert />}
               </ModalBody>
 
               <ModalFooter>
@@ -220,10 +227,20 @@ const ShopBody: React.FC = () => {
                   fontSize="2xl"
                   colorScheme="yellow"
                   mr={3}
-                  onClick={() => selectedProduct && handleAddToCart(selectedProduct)}
+                  onClick={() =>
+                    selectedProduct && handleAddToCart(selectedProduct)
+                  }
                 >
                   Adicionar ao carrinho
                 </Button>
+                <Button
+                  colorScheme="blue"
+                  mr={3}
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Continuar Comprando
+                </Button>
+                <Button colorScheme="green">Ir para o Carrinho</Button>
               </ModalFooter>
             </ModalContent>
           </Modal>
@@ -234,4 +251,3 @@ const ShopBody: React.FC = () => {
 };
 
 export default ShopBody;
-
