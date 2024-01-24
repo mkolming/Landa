@@ -7,9 +7,13 @@ import {
   Image,
   Flex,
   CloseButton,
+  Input,
+  InputGroup,
 } from "@chakra-ui/react";
 import { getCartItems, getTotalPrice, removeFromCart } from "./cart-utils";
 import { DataModel } from "../Hooks/types";
+
+import Cookies from "js-cookie";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState<DataModel[]>([]);
@@ -59,6 +63,42 @@ const Cart = () => {
     }
   };
 
+  const [checkoutDetails, setCheckoutDetails] = useState({
+    nome: '',
+    email: '',
+    cpf: '',
+    endereco: '',
+  });
+
+  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
+    const { name, value } = e.target;
+    setCheckoutDetails(prevDetails => ({
+      ...prevDetails,
+      [name]: value
+    }));
+  };
+
+  const handleCheckout = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    const cartItems = getCartItems();
+  
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cartItems, details: checkoutDetails }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Erro no HOOK');
+      }
+      Cookies.remove('cart');
+      setCartItems([]);
+
+    } catch (error) {
+      console.error('Erro no checkout:', error);
+    }
+  };
   return (
     <Flex minH="400px" w="50%" justifyContent="space-between">
       <Stack spacing={8}>
@@ -96,6 +136,42 @@ const Cart = () => {
         </Box>
       </Stack>
       <Box>
+        <Box>
+          <form onSubmit={handleCheckout}>
+            <input
+              type="text"
+              name="nome"
+              value={checkoutDetails.nome}
+              onChange={handleInputChange}
+              placeholder="Nome completo"
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              value={checkoutDetails.email}
+              onChange={handleInputChange}
+              placeholder="Email"
+              required
+            />
+            <input
+              type="text"
+              name="cpf"
+              value={checkoutDetails.cpf}
+              onChange={handleInputChange}
+              placeholder="CPF"
+              required
+            />
+            <textarea
+              name="endereco"
+              value={checkoutDetails.endereco}
+              onChange={handleInputChange}
+              placeholder="Endereço de entrega"
+              required
+            />
+            <Button colorScheme="blue" type="submit">Finalizar Compra</Button>
+        </form>
+        </Box>
         <Text fontSize="lg" fontWeight="bold">
           Total: {`R$ ${totalPrice}`}
         </Text>
