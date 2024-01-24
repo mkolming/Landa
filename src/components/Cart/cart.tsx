@@ -6,12 +6,10 @@ import {
   Stack,
   Image,
   Flex,
-  Divider,
   CloseButton,
 } from "@chakra-ui/react";
-import { getCartItems, getTotalPrice } from "./cart-utils";
+import { getCartItems, getTotalPrice, removeFromCart } from "./cart-utils";
 import { DataModel } from "../Hooks/types";
-import { removeFromCart } from "../Cart/cart-utils";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState<DataModel[]>([]);
@@ -20,16 +18,49 @@ const Cart = () => {
   useEffect(() => {
     const items = getCartItems();
     setCartItems(items);
-    const total = getTotalPrice(items);
-    setTotalPrice(total);
   }, []);
 
+  useEffect(() => {
+    const total = getTotalPrice(cartItems);
+    setTotalPrice(total);
+  }, [cartItems]);
+
   const handleRemoveFromCart = (productId: number) => {
-    removeFromCart(productId, setCartItems);
+    const newCartItems = removeFromCart(productId);
+    setCartItems(newCartItems);
+  };
+
+  const saveCartToBackend = async () => {
+    const cleanCartItems = cartItems.map((item) => ({
+      nome: item.nome,
+      image: item.image,
+      currency: item.currency,
+      price: item.price,
+      sell_status: item.sell_status,
+      colection: item.colection,
+      description: item.description,
+    }));
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: cleanCartItems }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Não foi possível salvar o carrinho");
+      }
+
+      const responseData = await response.json();
+      console.log("Carrinho salvo com sucesso. ID:", responseData.cart_id);
+    } catch (error) {
+      console.error("Erro ao salvar o carrinho:", error);
+    }
   };
 
   return (
-    <Flex w="50%" justifyContent="space-between">
+    <Flex minH="400px" w="50%" justifyContent="space-between">
       <Stack spacing={8}>
         <Box>
           {cartItems.length === 0 ? (
@@ -68,7 +99,9 @@ const Cart = () => {
         <Text fontSize="lg" fontWeight="bold">
           Total: {`R$ ${totalPrice}`}
         </Text>
-        <Button colorScheme="blue">Checkout</Button>
+        <Button colorScheme="blue" onClick={saveCartToBackend}>
+          Checkout
+        </Button>
       </Box>
     </Flex>
   );

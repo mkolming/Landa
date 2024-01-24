@@ -17,10 +17,6 @@ import {
   List,
   ListItem,
   ModalFooter,
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
 } from "@chakra-ui/react";
 import ProductCard from "../Shop/ProductCard";
 import styles from "@/styles/home.module.css";

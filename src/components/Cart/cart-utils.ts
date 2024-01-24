@@ -20,16 +20,13 @@ export const addToCart = (product: DataModel, callback: () => void) => {
   callback();
 };
 
-export const removeFromCart = (
-  productId: number,
-  callback: (newCartItems: DataModel[]) => void
-) => {
-  const cart = getCart();
-  const newCartItems = cart.filter(
+export const removeFromCart = (productId: number) => {
+  const cartItems = getCartItems();
+  const newCartItems = cartItems.filter(
     (item: { id: number }) => item.id !== productId
   );
   Cookies.set("cart", JSON.stringify(newCartItems));
-  callback(newCartItems);
+  return newCartItems;
 };
 
 export const getCartItems = () => {

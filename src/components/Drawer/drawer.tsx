@@ -45,7 +45,8 @@ function DrawerModel({ setTabIndex }: DrawerModelProps) {
   }, [isOpen]);
 
   const handleRemoveFromCart = (productId: number) => {
-    removeFromCart(productId, setCartItems);
+    const newCartItems = removeFromCart(productId);
+    setCartItems(newCartItems);
   };
 
   return (
@@ -54,8 +55,8 @@ function DrawerModel({ setTabIndex }: DrawerModelProps) {
         className={styles.p}
         fontSize="2xl"
         position="absolute"
-        right="20%"
-        top="15%"
+        top={200}
+        ml={1000}
         ref={btnRef}
         colorScheme="teal"
         onClick={onOpen}
