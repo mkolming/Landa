@@ -12,16 +12,17 @@ import {
 } from "@chakra-ui/react";
 import { getCartItems, getTotalPrice, removeFromCart } from "./cart-utils";
 import { DataModel } from "../Hooks/types";
+import { useNavigate } from "@/hooks/navigate";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState<DataModel[]>([]);
   const [totalPrice, setTotalPrice] = useState("0.00");
-
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [adress, setAdress] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const items = getCartItems();
@@ -71,13 +72,15 @@ const Cart = () => {
 
       const responseData = await response.json();
       console.log("Carrinho salvo com sucesso. ID:", responseData.cart_id);
+      localStorage.setItem("cartId", String(responseData.cart_id));
+      navigate("/pagamento");
     } catch (error) {
       console.error("Erro ao salvar o carrinho:", error);
     }
   };
 
   return (
-    <Flex ml={200} minH="400px" w="60%" justifyContent="space-between">
+    <Flex minH="400px" w="80%" justifyContent="space-between">
       <Stack spacing={8}>
         <Box>
           {cartItems.length === 0 ? (
