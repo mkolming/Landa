@@ -13,11 +13,15 @@ import {
 import { getCartItems, getTotalPrice, removeFromCart } from "./cart-utils";
 import { DataModel } from "../Hooks/types";
 
-import Cookies from "js-cookie";
-
 const Cart = () => {
   const [cartItems, setCartItems] = useState<DataModel[]>([]);
   const [totalPrice, setTotalPrice] = useState("0.00");
+
+  const [nome, setNome] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [adress, setAdress] = useState("");
 
   useEffect(() => {
     const items = getCartItems();
@@ -44,12 +48,21 @@ const Cart = () => {
       colection: item.colection,
       description: item.description,
     }));
+    const payload = {
+      items: cleanCartItems,
+      nome: nome,
+      totalPrice: totalPrice,
+      cpf: cpf,
+      email: email,
+      phone: phone,
+      adress: adress,
+    };
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/cart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items: cleanCartItems }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -63,44 +76,8 @@ const Cart = () => {
     }
   };
 
-  const [checkoutDetails, setCheckoutDetails] = useState({
-    nome: '',
-    email: '',
-    cpf: '',
-    endereco: '',
-  });
-
-  const handleInputChange = (e: { target: { name: any; value: any; }; }) => {
-    const { name, value } = e.target;
-    setCheckoutDetails(prevDetails => ({
-      ...prevDetails,
-      [name]: value
-    }));
-  };
-
-  const handleCheckout = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    const cartItems = getCartItems();
-  
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cartItems, details: checkoutDetails }),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Erro no HOOK');
-      }
-      Cookies.remove('cart');
-      setCartItems([]);
-
-    } catch (error) {
-      console.error('Erro no checkout:', error);
-    }
-  };
   return (
-    <Flex minH="400px" w="50%" justifyContent="space-between">
+    <Flex ml={200} minH="400px" w="60%" justifyContent="space-between">
       <Stack spacing={8}>
         <Box>
           {cartItems.length === 0 ? (
@@ -136,41 +113,37 @@ const Cart = () => {
         </Box>
       </Stack>
       <Box>
-        <Box>
-          <form onSubmit={handleCheckout}>
-            <input
-              type="text"
-              name="nome"
-              value={checkoutDetails.nome}
-              onChange={handleInputChange}
-              placeholder="Nome completo"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              value={checkoutDetails.email}
-              onChange={handleInputChange}
-              placeholder="Email"
-              required
-            />
-            <input
-              type="text"
-              name="cpf"
-              value={checkoutDetails.cpf}
-              onChange={handleInputChange}
-              placeholder="CPF"
-              required
-            />
-            <textarea
-              name="endereco"
-              value={checkoutDetails.endereco}
-              onChange={handleInputChange}
-              placeholder="Endereço de entrega"
-              required
-            />
-            <Button colorScheme="blue" type="submit">Finalizar Compra</Button>
-        </form>
+        <Box w="50%">
+          <Input
+            type="text"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            placeholder="Nome"
+          />
+          <Input
+            type="text"
+            value={cpf}
+            onChange={(e) => setCpf(e.target.value)}
+            placeholder="CPF"
+          />
+          <Input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+          />
+          <Input
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="Telefone"
+          />
+          <Input
+            type="text"
+            value={adress}
+            onChange={(e) => setAdress(e.target.value)}
+            placeholder="Endereço"
+          />
         </Box>
         <Text fontSize="lg" fontWeight="bold">
           Total: {`R$ ${totalPrice}`}
